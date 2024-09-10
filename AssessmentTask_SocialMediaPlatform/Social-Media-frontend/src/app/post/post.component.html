@@ -1,0 +1,28 @@
+<!-- src/app/product-list/product-list.component.html -->
+<div class="content">
+  <div>
+    <h1>Posts</h1>
+    <div>
+      <textarea [(ngModel)]="newPost.content" placeholder="New post" rows="10" cols="60" ></textarea>
+      <br>
+      <button (click)="addPost()">Add Post</button>
+    </div>
+    <div *ngIf="editPost">
+      <textarea [(ngModel)]="editPost.content" rows="10" cols="60"></textarea>
+      <br>
+      <button (click)="updatePost()">Update Post</button>
+      <button (click)="clearEditPost()">Cancel</button>
+    </div>
+    <ul>
+      <li *ngFor="let post of posts">
+        <!-- {{post | json}} -->
+        <p>{{ post.content }}</p>
+        <button (click)="setEditPost(post)">Edit</button>
+        <button (click)="deletePost(post.postID)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  
+</div>
+
+  

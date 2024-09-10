@@ -1,0 +1,7 @@
+<mat-form-field>
+    <mat-label>Selected User</mat-label>
+    <mat-select placeholder="Select User" [(value)]="selectedUser" (selectionChange)="onSelectUser($event.value)">
+      <mat-option *ngFor="let user of users" [value]="user">{{ user.userName }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  
