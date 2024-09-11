@@ -55,7 +55,7 @@ namespace Social_Media.Controllers
 
             // Validation: Check if user has already liked the post
             if (await _postInteractionService.UserHasLikedAsync(postId, like.UserID))
-                return BadRequest(new { message = "User has already liked this post" });
+                return BadRequest(new { message = "You have already liked this post" });
 
             // Ensure the PostID in the Like object matches the route parameter
             like.PostID = postId;

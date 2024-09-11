@@ -10,20 +10,21 @@
       <div class="card">
         <div class="card-body">
           <div class="card-text">
+            <strong>{{ getUserName(post.userID) }} posted</strong>
             <p class="post-content">{{ post.content }}</p>
           </div>
 
           <div class="like-comment">
             <div>
+              <p *ngIf="errorMessages[post.postID]" class="error-message">
+                {{ errorMessages[post.postID] }}
+              </p>
               <strong>Total Likes : </strong>
               <span>{{ getLikeCount(post.postID) }}</span>
             </div>
             <button (click)="likePost(post.postID)" class="btn btn-primary">
               Like
             </button>
-            <p *ngIf="errorMessages[post.postID]" class="error-message">
-              {{ errorMessages[post.postID] }}
-            </p>
 
             <div *ngIf="getCommentsForPost(post.postID).length > 0">
               <strong>Comments:</strong>
@@ -50,9 +51,6 @@
               >
                 Comment
               </button>
-              <p *ngIf="errorMessages[post.postID]" class="error-message">
-                {{ errorMessages[post.postID] }}
-              </p>
             </div>
           </div>
         </div>
