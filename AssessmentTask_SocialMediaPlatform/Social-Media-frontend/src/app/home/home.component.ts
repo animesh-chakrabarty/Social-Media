@@ -11,10 +11,11 @@ import { FormsModule } from '@angular/forms'; // Import FormsModule for NgModel
   styleUrls: ['./home.component.css'],
   imports: [CommonModule, FormsModule], // Import FormsModule here
 })
+
 export class HomeComponent implements OnInit {
   feedData: Feed | undefined;
   newComment: { [postId: number]: string } = {};
-  errorMessages: { [postId: number]: string } = {}; 
+  errorMessages: { [postId: number]: string } = {};
 
   constructor(private feedService: feedService) {}
 
@@ -51,7 +52,8 @@ export class HomeComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error liking post', err);
-        this.errorMessages[postID] = err.error.message || 'An error occurred while liking the post';
+        this.errorMessages[postID] =
+          err.error.message || 'An error occurred while liking the post';
       },
     });
   }
@@ -67,7 +69,8 @@ export class HomeComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error adding comment', err);
-        this.errorMessages[postID] = err.error.message || 'An error occurred while adding the comment';
+        this.errorMessages[postID] =
+          err.error.message || 'An error occurred while adding the comment';
       },
     });
   }
