@@ -1,37 +1,75 @@
-.posts-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-  
-  .post-card {
-    border: 1px solid #e1e1e1;
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  .post-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 12px;
-    font-size: 14px;
-    color: #555555;
-  }
-  
-  .post-user-id {
-    font-weight: bold;
-  }
-  
-  .post-id {
-    font-weight: normal;
-  }
-  
-  .post-content {
-    font-size: 16px;
-    color: #333333;
-  }
-  
+/* Container and row spacing */
+.container {
+  margin-top: 20px;
+  max-width: 900px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Card styling */
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.2s ease-in-out;
+  overflow: hidden;
+}
+
+/* .card:hover {
+  transform: scale(1.02);
+} */
+
+.card-body {
+  padding: 20px;
+}
+
+/* Card title and text */
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.card-text {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+/* Like count styling */
+p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Comment section styling */
+.list-group {
+  margin-top: 10px;
+  border-top: 1px solid #eaeaea;
+}
+
+.list-group-item {
+  background-color: transparent;
+  border: none;
+  font-size: 14px;
+  padding-left: 0;
+  padding-right: 0;
+  color: #444;
+}
+
+.list-group-item strong {
+  color: #333;
+}
+
+/* Loading spinner */
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border-width: 5px;
+}

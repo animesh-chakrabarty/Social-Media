@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PostService } from '../services/post.service';  // Adjust the path based on your project structure
-import { Post } from '../models/post';                  // Import the Post interface
+import { FeedService } from '../services/feed.service'; // Import FeedService
+import { Feed } from '../models/feed'; // Import Feed interface
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,23 +8,36 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [CommonModule]
+  imports: [CommonModule],
 })
 export class HomeComponent implements OnInit {
-  posts: Post[] = [];  // Array to store the posts
+  feedData: Feed | undefined; // To store the feed data
 
-  constructor(private postService: PostService) {}
+  constructor(private feedService: FeedService) {} // Inject FeedService
 
-  // This lifecycle hook will fetch the posts when the component is initialized
+  // This lifecycle hook will fetch the feed when the component is initialized
   ngOnInit(): void {
-    this.loadPosts();
+    this.loadFeed();
   }
 
-  // Fetch the posts using PostService
-  loadPosts(): void {
-    this.postService.getPosts().subscribe({
-      next: (data) => this.posts = data,    // Assign the data to the posts array
-      error: (err) => console.error('Error fetching posts', err)  // Handle errors
+  // Fetch the feed using FeedService
+  loadFeed(): void {
+    this.feedService.getFeed().subscribe({
+      next: (data) => (this.feedData = data), // Assign the data to feedData
+      error: (err) => console.error('Error fetching feed', err), // Handle errors
     });
+  }
+
+  getLikeCount(postID: number): number {
+    return (
+      this.feedData?.likes.filter((like) => like.postID === postID).length || 0
+    );
+  }
+
+  getCommentsForPost(postID: number): any[] {
+    return (
+      this.feedData?.comments.filter((comment) => comment.postID === postID) ||
+      []
+    );
   }
 }
