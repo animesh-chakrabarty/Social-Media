@@ -1,30 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { FeedService } from '../services/feed.service'; // Import FeedService
-import { Feed } from '../models/feed'; // Import Feed interface
+import { feedService } from '../services/feed.service';
+import { Feed } from '../models/feed';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // Import FormsModule for NgModel
 
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule], // Import FormsModule here
 })
 export class HomeComponent implements OnInit {
-  feedData: Feed | undefined; // To store the feed data
+  feedData: Feed | undefined;
+  newComment: { [postId: number]: string } = {};
 
-  constructor(private feedService: FeedService) {} // Inject FeedService
+  constructor(private feedService: feedService) {}
 
-  // This lifecycle hook will fetch the feed when the component is initialized
   ngOnInit(): void {
     this.loadFeed();
   }
 
-  // Fetch the feed using FeedService
   loadFeed(): void {
     this.feedService.getFeed().subscribe({
-      next: (data) => (this.feedData = data), // Assign the data to feedData
-      error: (err) => console.error('Error fetching feed', err), // Handle errors
+      next: (data) => (this.feedData = data),
+      error: (err) => console.error('Error fetching feed', err),
     });
   }
 
@@ -39,5 +39,25 @@ export class HomeComponent implements OnInit {
       this.feedData?.comments.filter((comment) => comment.postID === postID) ||
       []
     );
+  }
+
+  likePost(postID: number): void {
+    const userId = 2; // Replace with actual user ID
+    this.feedService.addLike(postID, userId).subscribe({
+      next: () => this.loadFeed(),
+      error: (err) => console.error('Error liking post', err),
+    });
+  }
+
+  addComment(postID: number): void {
+    const userId = 2; // Replace with actual user ID
+    const content = this.newComment[postID];
+    this.feedService.addComment(postID, userId, content).subscribe({
+      next: () => {
+        this.newComment[postID] = ''; // Clear the input field
+        this.loadFeed();
+      },
+      error: (err) => console.error('Error adding comment', err),
+    });
   }
 }

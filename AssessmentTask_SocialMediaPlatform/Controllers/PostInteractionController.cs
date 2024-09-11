@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 namespace Social_Media.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/feed/[controller]")]
     public class PostInteractionController : ControllerBase
     {
         private readonly PostInteractionService _postInteractionService;
@@ -30,11 +30,11 @@ namespace Social_Media.Controllers
         {
             // Validation: Check if post exists
             if (!await _postInteractionService.PostExistsAsync(postId))
-                return NotFound("Post not found");
+                return NotFound(new { message = "Post not found" });
 
             // Validation: Check for banned words
             if (ContainsBannedWords(comment.Content))
-                return BadRequest("Comment contains inappropriate language");
+                return BadRequest(new { message = "Comment contains inappropriate language" });
 
             // Set the PostID for the comment
             comment.PostID = postId;
@@ -42,7 +42,7 @@ namespace Social_Media.Controllers
             // Add comment to the database
             await _postInteractionService.AddCommentAsync(comment);
 
-            return Ok("Comment added successfully");
+            return Ok(new { message = "Comment added successfully" });
         }
 
         // Add a like to a post
@@ -51,11 +51,11 @@ namespace Social_Media.Controllers
         {
             // Validation: Check if post exists
             if (!await _postInteractionService.PostExistsAsync(postId))
-                return NotFound("Post not found");
+                return NotFound(new { message = "Post not found" });
 
             // Validation: Check if user has already liked the post
             if (await _postInteractionService.UserHasLikedAsync(postId, like.UserID))
-                return BadRequest("User has already liked this post");
+                return BadRequest(new { message = "User has already liked this post" });
 
             // Ensure the PostID in the Like object matches the route parameter
             like.PostID = postId;
@@ -63,8 +63,9 @@ namespace Social_Media.Controllers
             // Add like to the database
             await _postInteractionService.AddLikeAsync(like);
 
-            return Ok("Like added successfully");
+            return Ok(new { message = "Like added successfully" });
         }
+
 
 
         // Check for banned words in the content

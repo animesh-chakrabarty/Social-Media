@@ -17,6 +17,9 @@
 
           <!-- Like count -->
           <p><strong>Likes:</strong> {{ getLikeCount(post.postID) }}</p>
+          <button (click)="likePost(post.postID)" class="btn btn-primary">
+            Like
+          </button>
 
           <!-- Comments section -->
           <div *ngIf="getCommentsForPost(post.postID).length > 0">
@@ -30,6 +33,21 @@
                 {{ comment.content }}
               </li>
             </ul>
+          </div>
+
+          <!-- Add comment -->
+          <div class="mt-3">
+            <textarea
+              [(ngModel)]="newComment[post.postID]"
+              placeholder="Add a comment..."
+              class="form-control"
+            ></textarea>
+            <button
+              (click)="addComment(post.postID)"
+              class="btn btn-secondary mt-2"
+            >
+              Comment
+            </button>
           </div>
         </div>
       </div>
