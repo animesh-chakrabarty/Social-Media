@@ -11,18 +11,42 @@ import { UserService } from '../services/user.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './post.component.html',
-  styleUrl: './post.component.css'
+  styleUrl: './post.component.css',
 })
 export class PostComponent implements OnInit {
   posts: Post[] = [];
   newPost: Post = { postID: 0, userID: 0, content: '' };
   editPost: Post | null = null;
   selectedUser: User | null = null;
+  errorMessage: string | null = null;
 
-  constructor(private postService: PostService, private userService: UserService) {}
+  bannedWords: string[] = [
+    'monolith',
+    'spaghettiCode',
+    'goto',
+    'hack',
+    'architrixs',
+    'quickAndDirty',
+    'cowboy',
+    'yo',
+    'globalVariable',
+    'recursiveHell',
+    'backdoor',
+    'hotfix',
+    'leakyAbstraction',
+    'mockup',
+    'singleton',
+    'silverBullet',
+    'technicalDebt',
+  ];
+
+  constructor(
+    private postService: PostService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
-    this.userService.selectedUser$.subscribe(user => {
+    this.userService.selectedUser$.subscribe((user) => {
       this.selectedUser = user;
       this.loadPosts();
     });
@@ -30,19 +54,37 @@ export class PostComponent implements OnInit {
 
   loadPosts(): void {
     if (this.selectedUser) {
-      this.postService.getPosts().subscribe(posts => {
-        this.posts = posts.filter(post => post.userID === this.selectedUser?.userID);
+      this.postService.getPosts().subscribe((posts) => {
+        this.posts = posts.filter(
+          (post) => post.userID === this.selectedUser?.userID
+        );
       });
     }
   }
 
+  containsBannedWords(content: string): boolean {
+    const lowerContent = content.toLowerCase();
+    const bannedWordsRegex = new RegExp(`\\b(${this.bannedWords.join('|')})\\b`, 'i');
+    return bannedWordsRegex.test(lowerContent);
+  }
+
   addPost(): void {
     if (this.selectedUser) {
+      if (this.containsBannedWords(this.newPost.content)) {
+        this.errorMessage = 'Post contains inappropriate words.';
+        return;
+      }
       this.newPost.userID = this.selectedUser.userID;
-      this.postService.createPost(this.newPost).subscribe(post => {
-        this.posts.push(post);
-        this.newPost.content = '';
-      });
+      this.postService.createPost(this.newPost).subscribe(
+        (post) => {
+          this.posts.push(post);
+          this.newPost.content = '';
+          this.errorMessage = null; // Clear any previous error messages
+        },
+        (error) => {
+          this.errorMessage = 'An error occurred while adding the post.';
+        }
+      );
     }
   }
 
@@ -66,5 +108,4 @@ export class PostComponent implements OnInit {
   clearEditPost(): void {
     this.editPost = null;
   }
-
 }

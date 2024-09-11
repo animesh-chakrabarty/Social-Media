@@ -3,13 +3,21 @@
   <div>
     <h1>Posts</h1>
     <div>
-      <textarea [(ngModel)]="newPost.content" placeholder="New post" rows="10" cols="60" ></textarea>
-      <br>
+      <textarea
+        [(ngModel)]="newPost.content"
+        placeholder="New post"
+        rows="10"
+        cols="60"
+      ></textarea>
+      <br />
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
       <button (click)="addPost()">Add Post</button>
     </div>
     <div *ngIf="editPost">
       <textarea [(ngModel)]="editPost.content" rows="10" cols="60"></textarea>
-      <br>
+      <br />
       <button (click)="updatePost()">Update Post</button>
       <button (click)="clearEditPost()">Cancel</button>
     </div>
@@ -22,7 +30,4 @@
       </li>
     </ul>
   </div>
-  
 </div>
-
-  
