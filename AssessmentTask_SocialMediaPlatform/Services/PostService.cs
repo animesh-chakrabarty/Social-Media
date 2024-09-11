@@ -94,17 +94,17 @@ public class PostService
         return _context.Posts.Any(e => e.PostID == id);
     }
 
-     public async Task<UserFeed> GetUserFeedAsync()
-        {
-            var posts = await _context.Posts.ToListAsync();
-            var likes = await _context.Likes.ToListAsync();
-            var comments = await _context.Comments.ToListAsync();
+    public async Task<UserFeed> GetUserFeedAsync()
+    {
+        var posts = await _context.Posts.ToListAsync();
+        var likes = await _context.Likes.ToListAsync();
+        var comments = await _context.Comments.ToListAsync();
 
-            return new UserFeed
-            {
-                Posts = posts,
-                Likes = likes,
-                Comments = comments
-            };
-        }
+        return new UserFeed
+        {
+            Posts = posts,
+            Likes = likes,
+            Comments = comments
+        };
+    }
 }
