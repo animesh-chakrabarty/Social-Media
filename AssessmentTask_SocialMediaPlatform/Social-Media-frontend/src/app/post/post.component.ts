@@ -64,7 +64,10 @@ export class PostComponent implements OnInit {
 
   containsBannedWords(content: string): boolean {
     const lowerContent = content.toLowerCase();
-    const bannedWordsRegex = new RegExp(`\\b(${this.bannedWords.join('|')})\\b`, 'i');
+    const bannedWordsRegex = new RegExp(
+      `\\b(${this.bannedWords.join('|')})\\b`,
+      'i'
+    );
     return bannedWordsRegex.test(lowerContent);
   }
 
@@ -90,6 +93,10 @@ export class PostComponent implements OnInit {
 
   updatePost(): void {
     if (this.editPost) {
+      if (this.containsBannedWords(this.editPost.content)) {
+        this.errorMessage = 'Post contains inappropriate words.';
+        return;
+      }
       this.postService.updatePost(this.editPost).subscribe(() => {
         this.loadPosts();
         this.editPost = null;

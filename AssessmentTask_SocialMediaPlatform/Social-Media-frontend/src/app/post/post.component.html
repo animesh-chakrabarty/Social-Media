@@ -2,6 +2,9 @@
 <div class="content">
   <div>
     <h1>Posts</h1>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
     <div>
       <textarea
         [(ngModel)]="newPost.content"
@@ -10,9 +13,6 @@
         cols="60"
       ></textarea>
       <br />
-      <div *ngIf="errorMessage" class="alert alert-danger">
-        {{ errorMessage }}
-      </div>
       <button (click)="addPost()">Add Post</button>
     </div>
     <div *ngIf="editPost">
