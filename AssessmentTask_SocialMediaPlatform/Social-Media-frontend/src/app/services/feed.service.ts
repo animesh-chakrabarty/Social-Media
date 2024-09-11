@@ -22,9 +22,20 @@ export class feedService {
   }
 
   addComment(postID: number, userID: number, content: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}feed/postinteraction/${postID}/comment`, {
-      UserID: userID,
-      Content: content,
-    });
+    return this.http.post(
+      `${this.apiUrl}feed/postinteraction/${postID}/comment`,
+      {
+        UserID: userID,
+        Content: content,
+      }
+    );
+  }
+
+  getUserName(
+    userID: number
+  ): Observable<{ userID: number; userName: string }> {
+    return this.http.get<{ userID: number; userName: string }>(
+      `${this.apiUrl}user/${userID}`
+    );
   }
 }

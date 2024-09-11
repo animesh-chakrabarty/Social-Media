@@ -19,6 +19,8 @@ export class HomeComponent implements OnInit {
   errorMessages: { [postId: number]: string } = {};
   selectedUser: User | null = null; // Track the selected user
 
+  userNameCache: Map<number, string> = new Map();
+
   constructor(
     private feedService: feedService,
     private userService: UserService
@@ -87,5 +89,24 @@ export class HomeComponent implements OnInit {
           },
         });
     }
+  }
+
+  getUserName(userID: number): string {
+    if (this.userNameCache.has(userID)) {
+      return this.userNameCache.get(userID)!; // Return from cache if available
+    }
+
+    // Call the API to get the user's details (userID and userName)
+    this.feedService.getUserName(userID).subscribe({
+      next: (user) => {
+        this.userNameCache.set(user.userID, user.userName); // Cache the userName with userID
+      },
+      error: (err) => {
+        console.error('Error fetching username', err);
+        this.userNameCache.set(userID, 'Unknown'); // Fallback in case of error
+      },
+    });
+
+    return 'Loading...'; // Display a placeholder until the username is fetched
   }
 }
