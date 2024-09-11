@@ -1,17 +1,22 @@
 /* Container and row spacing */
 .container {
   margin-top: 20px;
-  max-width: 900px;
+  max-width: 1900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .row {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   gap: 20px;
 }
 
 /* Card styling */
 .card {
+  border: 1px solid black;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
@@ -25,6 +30,9 @@
 
 .card-body {
   padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 /* Card title and text */
@@ -41,6 +49,22 @@
   margin-bottom: 15px;
 }
 
+.post-content{
+  font-size: 30px;
+  color: black;
+  font-weight: 600;
+}
+
+
+.like-comment{
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.2s ease-in-out;
+  overflow: hidden;
+  padding: 10px;
+}
 /* Like count styling */
 p {
   margin: 0;
@@ -80,3 +104,9 @@ p {
   margin-top: 0.5em; /* Optional: Add some spacing above the error message */
 }
 
+.mt-3{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
