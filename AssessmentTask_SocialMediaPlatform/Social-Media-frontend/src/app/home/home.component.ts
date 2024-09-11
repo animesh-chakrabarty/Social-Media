@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms'; // Import FormsModule for NgModel
 export class HomeComponent implements OnInit {
   feedData: Feed | undefined;
   newComment: { [postId: number]: string } = {};
+  errorMessages: { [postId: number]: string } = {}; // To hold error messages
 
   constructor(private feedService: feedService) {}
 
@@ -44,8 +45,14 @@ export class HomeComponent implements OnInit {
   likePost(postID: number): void {
     const userId = 2; // Replace with actual user ID
     this.feedService.addLike(postID, userId).subscribe({
-      next: () => this.loadFeed(),
-      error: (err) => console.error('Error liking post', err),
+      next: () => {
+        this.loadFeed(); // Refresh the feed
+        this.errorMessages[postID] = ''; // Clear any previous error message
+      },
+      error: (err) => {
+        console.error('Error liking post', err);
+        this.errorMessages[postID] = err.error.message || 'An error occurred while liking the post';
+      },
     });
   }
 
@@ -55,9 +62,13 @@ export class HomeComponent implements OnInit {
     this.feedService.addComment(postID, userId, content).subscribe({
       next: () => {
         this.newComment[postID] = ''; // Clear the input field
-        this.loadFeed();
+        this.loadFeed(); // Refresh the feed
+        this.errorMessages[postID] = ''; // Clear any previous error message
       },
-      error: (err) => console.error('Error adding comment', err),
+      error: (err) => {
+        console.error('Error adding comment', err);
+        this.errorMessages[postID] = err.error.message || 'An error occurred while adding the comment';
+      },
     });
   }
 }

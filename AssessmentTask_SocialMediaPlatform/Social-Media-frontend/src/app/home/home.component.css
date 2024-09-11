@@ -73,3 +73,10 @@ p {
   height: 3rem;
   border-width: 5px;
 }
+
+.error-message {
+  color: red;
+  font-size: 0.875em; /* Optional: Adjust the font size */
+  margin-top: 0.5em; /* Optional: Add some spacing above the error message */
+}
+

@@ -20,6 +20,9 @@
           <button (click)="likePost(post.postID)" class="btn btn-primary">
             Like
           </button>
+          <p *ngIf="errorMessages[post.postID]" class="error-message">
+            {{ errorMessages[post.postID] }}
+          </p>
 
           <!-- Comments section -->
           <div *ngIf="getCommentsForPost(post.postID).length > 0">
@@ -48,6 +51,9 @@
             >
               Comment
             </button>
+            <p *ngIf="errorMessages[post.postID]" class="error-message">
+              {{ errorMessages[post.postID] }}
+            </p>
           </div>
         </div>
       </div>
