@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms'; // Import FormsModule for NgModel
 export class HomeComponent implements OnInit {
   feedData: Feed | undefined;
   newComment: { [postId: number]: string } = {};
-  errorMessages: { [postId: number]: string } = {}; // To hold error messages
+  errorMessages: { [postId: number]: string } = {}; 
 
   constructor(private feedService: feedService) {}
 
