@@ -15,6 +15,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<PostService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<FeedService>();
+builder.Services.AddScoped<LeaderBoardService>();
+
 
 
 builder.Services.AddCors(options =>

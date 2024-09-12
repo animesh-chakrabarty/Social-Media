@@ -74,12 +74,4 @@ public class UserController : ControllerBase
         return NoContent();
     }
 
-
-    [HttpGet("calculate-leaderboard")]
-    public async Task<ActionResult<IEnumerable<UserEngagement>>> GetUserEngagementScores()
-    {
-        var engagementScores = await _userService.GetUserEngagementScoresAsync();
-        return Ok(engagementScores);
-    }
-
 }

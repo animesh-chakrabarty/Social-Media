@@ -8,7 +8,7 @@ import { LeaderBoard } from '../models/leaderboard';
   providedIn: 'root'
 })
 export class LeaderBoardService {
-  private apiUrl = 'http://localhost:5182/user/calculate-leaderboard';
+  private apiUrl = 'http://localhost:5182/leaderboard';
 
   constructor(private http: HttpClient) {}
 
