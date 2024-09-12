@@ -2,6 +2,7 @@
 <div class="leaderboard-container">
     <div class="card" *ngFor="let user of leaderBoard">
       <div class="card-header">
+        <h3>Rank : {{user.rank}}</h3>
         <h3 class="card-header-username">{{ user.userName }}</h3>
         <p><strong>Engagement Score:</strong> {{ user.engagementScore }}</p>
       </div>

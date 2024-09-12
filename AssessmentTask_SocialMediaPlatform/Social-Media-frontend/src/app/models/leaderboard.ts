@@ -5,4 +5,5 @@ export interface LeaderBoard {
   numberOfLikes: number;
   numberOfComments: number;
   engagementScore: number;
+  rank: number;
 }

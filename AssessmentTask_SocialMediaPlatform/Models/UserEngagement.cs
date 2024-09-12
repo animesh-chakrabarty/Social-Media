@@ -1,4 +1,3 @@
-namespace Social_Media.Models;
 public class UserEngagement
 {
     public int UserID { get; set; }
@@ -7,4 +6,5 @@ public class UserEngagement
     public int NumberOfLikes { get; set; }
     public int NumberOfComments { get; set; }
     public int EngagementScore { get; set; }
+    public int Rank { get; set; } 
 }
