@@ -15,16 +15,25 @@
           </div>
 
           <div class="like-comment">
-            <div>
+            <div class="like">
               <p *ngIf="errorMessages[post.postID]" class="error-message">
                 {{ errorMessages[post.postID] }}
               </p>
-              <strong>Total Likes : </strong>
-              <span>{{ getLikeCount(post.postID) }}</span>
+              <button
+                (click)="likePost(post.postID)"
+                [ngClass]="{
+                  'btn-primary': !isPostLikedByUser(post.postID),
+                  'btn-success': isPostLikedByUser(post.postID)
+                }"
+                class="btn"
+              >
+                {{ isPostLikedByUser(post.postID) ? "Liked" : "Like" }}
+              </button>
+              <div>
+                <strong>Total Likes : </strong>
+                <span>{{ getLikeCount(post.postID) }}</span>
+              </div>
             </div>
-            <button (click)="likePost(post.postID)" class="btn btn-primary">
-              Like
-            </button>
 
             <div *ngIf="getCommentsForPost(post.postID).length > 0">
               <strong>Comments:</strong>

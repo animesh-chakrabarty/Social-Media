@@ -109,4 +109,16 @@ export class HomeComponent implements OnInit {
 
     return 'Loading...'; // Display a placeholder until the username is fetched
   }
+
+  isPostLikedByUser(postID: number): boolean {
+    if (!this.selectedUser || !this.feedData) {
+      return false;
+    }
+
+    // Check if the selected user has already liked this post
+    return this.feedData.likes.some(
+      (like) =>
+        like.postID === postID && like.userID === this.selectedUser?.userID
+    );
+  }
 }

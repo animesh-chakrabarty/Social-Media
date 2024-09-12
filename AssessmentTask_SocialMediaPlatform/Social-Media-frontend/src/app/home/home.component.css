@@ -110,3 +110,12 @@ p {
   align-items: center;
   gap: 5px;
 }
+
+.btn-success {
+  background-color: #28a745; /* Green color for liked */
+  border-color: #28a745;
+}
+
+.like{
+  margin-bottom: 10px;
+}
