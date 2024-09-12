@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 
 namespace Social_Media.Controllers;
 
-// controller to fetch user feed
 [ApiController]
 [Route("[controller]")]
 public class FeedController : ControllerBase

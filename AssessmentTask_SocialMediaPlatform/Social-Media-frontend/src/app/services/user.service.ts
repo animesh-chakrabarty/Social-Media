@@ -30,6 +30,7 @@ export class UserService {
     return this.getUsers().pipe(map((users: any[]) => users[0]));
   }
 
+  // get userName by userID
   getUserName(
     userID: number
   ): Observable<{ userID: number; userName: string }> {

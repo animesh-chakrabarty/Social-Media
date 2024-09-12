@@ -16,6 +16,7 @@ public class LeaderBoardController : ControllerBase
         _leaderBoardService = leaderBoardService;
     }
 
+    // GET - /leaderboard - retrieve user engagement leaderboard
     [HttpGet]
     public async Task<ActionResult<IEnumerable<UserEngagement>>> GetUserEngagementScores()
     {

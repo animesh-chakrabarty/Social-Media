@@ -1,17 +1,16 @@
-<!-- src/app/leaderboard/leaderboard.component.html -->
 <div class="leaderboard-container">
-    <div class="card" *ngFor="let user of leaderBoard">
-      <div class="card-header">
-        <h3>Rank : {{user.rank}}</h3>
-        <h3 class="card-header-username">{{ user.userName }}</h3>
-        <p><strong>Engagement Score:</strong> {{ user.engagementScore }}</p>
-      </div>
-      <div class="card-body">
-        <!-- <p><strong>User ID:</strong> {{ user.userID }}</p> -->
-        <p><strong>Total Number of Posts:</strong> {{ user.numberOfPosts }}</p>
-        <p><strong>Total Number of Likes:</strong> {{ user.numberOfLikes }}</p>
-        <p><strong>Total Number of Comments:</strong> {{ user.numberOfComments }}</p>
-      </div>
+  <div class="card" *ngFor="let user of leaderBoard">
+    <div class="card-header">
+      <h3>Rank : {{ user.rank }}</h3>
+      <h3 class="card-header-username">{{ user.userName }}</h3>
+      <p><strong>Engagement Score:</strong> {{ user.engagementScore }}</p>
+    </div>
+    <div class="card-body">
+      <p><strong>Total Number of Posts:</strong> {{ user.numberOfPosts }}</p>
+      <p><strong>Total Number of Likes:</strong> {{ user.numberOfLikes }}</p>
+      <p>
+        <strong>Total Number of Comments:</strong> {{ user.numberOfComments }}
+      </p>
     </div>
   </div>
-  
+</div>

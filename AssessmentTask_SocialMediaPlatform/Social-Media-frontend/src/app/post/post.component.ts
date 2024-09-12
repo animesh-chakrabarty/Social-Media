@@ -52,6 +52,7 @@ export class PostComponent implements OnInit {
     });
   }
 
+  // loads own posts
   loadPosts(): void {
     if (this.selectedUser) {
       this.postService.getPosts().subscribe((posts) => {
@@ -62,6 +63,7 @@ export class PostComponent implements OnInit {
     }
   }
 
+  // check for banned words
   containsBannedWords(content: string): boolean {
     const lowerContent = content.toLowerCase();
     const bannedWordsRegex = new RegExp(
@@ -71,8 +73,10 @@ export class PostComponent implements OnInit {
     return bannedWordsRegex.test(lowerContent);
   }
 
+  // add a new post
   addPost(): void {
     if (this.selectedUser) {
+      // check if post contains banned words or not
       if (this.containsBannedWords(this.newPost.content)) {
         this.errorMessage = 'Post contains inappropriate words.';
         return;
@@ -91,6 +95,7 @@ export class PostComponent implements OnInit {
     }
   }
 
+  // update a already existing post
   updatePost(): void {
     if (this.editPost) {
       if (this.containsBannedWords(this.editPost.content)) {
@@ -104,6 +109,7 @@ export class PostComponent implements OnInit {
     }
   }
 
+  // delete post
   deletePost(id: number): void {
     this.postService.deletePost(id).subscribe(() => this.loadPosts());
   }

@@ -12,6 +12,7 @@ export class LeaderBoardService {
 
   constructor(private http: HttpClient) {}
 
+  // get leaderboard
   getLeaderBoard(): Observable<LeaderBoard[]> {
     return this.http.get<LeaderBoard[]>(this.apiUrl);
   }

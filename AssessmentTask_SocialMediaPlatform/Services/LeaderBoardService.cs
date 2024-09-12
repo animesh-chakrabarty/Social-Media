@@ -12,6 +12,7 @@ public class LeaderBoardService
         _context = context;
     }
 
+    // calculate leaderboard
     public async Task<IEnumerable<UserEngagement>> GetUserEngagementScoresAsync()
     {
         var engagementScores = await _context.Users

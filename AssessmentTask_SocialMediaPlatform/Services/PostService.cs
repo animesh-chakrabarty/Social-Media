@@ -31,18 +31,22 @@ public class PostService
         _context = context;
     }
 
+    // get all the posts
     public async Task<IEnumerable<Post>> GetPostsAsync()
     {
         return await _context.Posts.ToListAsync();
     }
 
+    // get posts by id
     public async Task<Post> GetPostByIdAsync(int id)
     {
         return await _context.Posts.FindAsync(id);
     }
 
+    // create a new post
     public async Task<Post> CreatePostAsync(Post post)
     {
+        // check if content contains banned words
         if (ContainsBannedWords(post.Content))
         {
             throw new Exception("Your post contains inappropriate content and cannot be posted.");
@@ -52,10 +56,12 @@ public class PostService
         return post;
     }
 
+    // update a post
     public async Task<Post> UpdatePostAsync(Post post)
     {
         _context.Entry(post).State = EntityState.Modified;
 
+        // check if updated content contains banned words
         if (ContainsBannedWords(post.Content))
         {
             throw new Exception("Your post contains inappropriate content and cannot be posted.");
@@ -80,6 +86,7 @@ public class PostService
         return post;
     }
 
+    // delete post
     public async Task<Post> DeletePostAsync(int id)
     {
         var post = await _context.Posts.FindAsync(id);
@@ -94,6 +101,7 @@ public class PostService
         return post;
     }
 
+    // check if post exists or not
     private bool PostExists(int id)
     {
         return _context.Posts.Any(e => e.PostID == id);

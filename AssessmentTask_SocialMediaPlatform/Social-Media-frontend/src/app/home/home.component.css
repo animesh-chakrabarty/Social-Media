@@ -24,10 +24,6 @@
   overflow: hidden;
 }
 
-/* .card:hover {
-  transform: scale(1.02);
-} */
-
 .card-body {
   padding: 20px;
   display: flex;
@@ -100,8 +96,8 @@ p {
 
 .error-message {
   color: red;
-  font-size: 0.875em; /* Optional: Adjust the font size */
-  margin-top: 0.5em; /* Optional: Add some spacing above the error message */
+  font-size: 0.875em; 
+  margin-top: 0.5em; 
 }
 
 .mt-3{
@@ -112,7 +108,7 @@ p {
 }
 
 .btn-success {
-  background-color: #28a745; /* Green color for liked */
+  background-color: #28a745; 
   border-color: #28a745;
 }
 
