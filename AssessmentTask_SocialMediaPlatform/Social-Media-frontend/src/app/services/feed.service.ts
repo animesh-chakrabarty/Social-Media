@@ -7,35 +7,27 @@ import { Feed } from '../models/feed';
   providedIn: 'root',
 })
 export class feedService {
-  private apiUrl = 'http://localhost:5182/';
+  private apiUrl = 'http://localhost:5182/feed';
 
   constructor(private http: HttpClient) {}
 
   getFeed(): Observable<Feed> {
-    return this.http.get<Feed>(`${this.apiUrl}post/feed`);
+    return this.http.get<Feed>(`${this.apiUrl}`);
   }
 
   addLike(postID: number, userID: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}feed/postinteraction/${postID}/like`, {
+    return this.http.post(`${this.apiUrl}/${postID}/like`, {
       UserID: userID,
     });
   }
 
   addComment(postID: number, userID: number, content: string): Observable<any> {
     return this.http.post(
-      `${this.apiUrl}feed/postinteraction/${postID}/comment`,
+      `${this.apiUrl}/${postID}/comment`,
       {
         UserID: userID,
         Content: content,
       }
-    );
-  }
-
-  getUserName(
-    userID: number
-  ): Observable<{ userID: number; userName: string }> {
-    return this.http.get<{ userID: number; userName: string }>(
-      `${this.apiUrl}user/${userID}`
     );
   }
 }

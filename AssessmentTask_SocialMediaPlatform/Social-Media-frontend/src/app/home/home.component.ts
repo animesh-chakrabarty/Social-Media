@@ -91,13 +91,14 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  // get username by id
   getUserName(userID: number): string {
     if (this.userNameCache.has(userID)) {
       return this.userNameCache.get(userID)!; // Return from cache if available
     }
 
     // Call the API to get the user's details (userID and userName)
-    this.feedService.getUserName(userID).subscribe({
+    this.userService.getUserName(userID).subscribe({
       next: (user) => {
         this.userNameCache.set(user.userID, user.userName); // Cache the userName with userID
       },

@@ -6,16 +6,18 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 import { User } from '../models/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-  private selectedUserSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
-  selectedUser$: Observable<User | null> = this.selectedUserSubject.asObservable();
+  private selectedUserSubject: BehaviorSubject<User | null> =
+    new BehaviorSubject<User | null>(null);
+  selectedUser$: Observable<User | null> =
+    this.selectedUserSubject.asObservable();
 
   setSelectedUser(user: User): void {
     this.selectedUserSubject.next(user);
   }
-  
+
   private apiUrl = 'http://localhost:5182/User';
 
   constructor(private http: HttpClient) {}
@@ -25,8 +27,14 @@ export class UserService {
   }
 
   getFirstUser(): Observable<User> {
-    return this.getUsers().pipe(
-      map((users: any[]) => users[0])
+    return this.getUsers().pipe(map((users: any[]) => users[0]));
+  }
+
+  getUserName(
+    userID: number
+  ): Observable<{ userID: number; userName: string }> {
+    return this.http.get<{ userID: number; userName: string }>(
+      `${this.apiUrl}/${userID}`
     );
   }
 }

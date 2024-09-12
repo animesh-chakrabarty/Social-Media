@@ -1,6 +1,6 @@
 // src/app/leaderboard/leaderboard.component.ts
 import { Component, OnInit } from '@angular/core';
-import { LeaderBoardService } from './leader-board.service';
+import { LeaderBoardService } from '../services/leader-board.service';
 import { LeaderBoard } from '../models/leaderboard';
 import { CommonModule } from '@angular/common';
 

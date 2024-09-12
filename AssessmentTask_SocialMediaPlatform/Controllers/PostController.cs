@@ -92,11 +92,4 @@ public class PostController : ControllerBase
 
         return NoContent();
     }
-
-    [HttpGet("feed")]
-    public async Task<ActionResult<UserFeed>> GetUserFeed()
-    {
-        var feed = await _postService.GetUserFeedAsync();
-        return Ok(feed);
-    }
 }
